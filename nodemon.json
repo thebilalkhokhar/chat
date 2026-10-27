@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "watch": ["src"],
+  "ext": "ts,json,html,css",
+  "ignore": [
+    "src/**/*.test.ts",
+    "src/scripts/**",
+    "dist/**",
+    "node_modules/**"
+  ],
+  "exec": "ts-node --transpile-only",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": "400",
+
+  "//": "Polling instead of native file events. On Windows the native watcher misses edits made by anything other than the editor in focus — nodemon prints 'restarting due to changes' and then keeps serving the old code, which is far more confusing than not restarting at all. Polling costs a little CPU on a source tree this small and is reliable.",
+  "legacyWatch": true,
+  "pollingInterval": 500
+}
+

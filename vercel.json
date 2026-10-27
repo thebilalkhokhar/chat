@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/server/public",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60,
+      "includeFiles": "dist/**"
+    },
+    "api/cron/worker.js": {
+      "maxDuration": 300,
+      "includeFiles": "dist/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/cron/worker", "destination": "/api/cron/worker" },
+    { "source": "/(.*)", "destination": "/api/index" }
+  ],
+  "crons": [
+    { "path": "/api/cron/worker", "schedule": "* * * * *" }
+  ]
+}
